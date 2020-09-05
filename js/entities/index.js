@@ -14,3 +14,5 @@ __exportStar(require("./base"), exports);
 __exportStar(require("./errors"), exports);
 __exportStar(require("./user"), exports);
 __exportStar(require("./product"), exports);
+__exportStar(require("./customer"), exports);
+__exportStar(require("./transaction"), exports);

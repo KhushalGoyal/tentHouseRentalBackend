@@ -1,4 +1,4 @@
-import { AbstractService, RequestQuery } from "./base";
+import { AbstractService, RequestQuery } from "../controllers/base";
 import { Product } from "../entities";
 import { ProductReprository } from "../repository/product";
 
@@ -12,7 +12,7 @@ export class ProductService extends AbstractService<Product> {
         return this.productRepository.findById(_id)
     }
 
-    public getAll = async (query : RequestQuery<Product>) : Promise<any> => {
+    public getAll = async (query : any) : Promise<any> => {
         const requestQuery = this.getQuery(query)
         return this.productRepository.getAll(requestQuery)
     }

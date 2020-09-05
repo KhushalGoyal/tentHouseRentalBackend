@@ -16,7 +16,7 @@ export class ProductReprository {
     async pagination(filter: Product, paginationOptions: PaginateOptions): Promise<PaginateResult<any>> {
         return ProductModel.paginate(filter, paginationOptions);
     }
-    async getAll(requestQuery: RequestQuery<Product>): Promise<any> {
-        return ProductModel.find(requestQuery).lean() as any;
+    async getAll(requestQuery: any): Promise<any> {
+        return ProductModel.find().lean() as any;
     }
 }

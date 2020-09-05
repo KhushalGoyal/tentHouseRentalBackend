@@ -7,6 +7,7 @@ var StatusCodes;
     StatusCodes[StatusCodes["INTERNAL_SERVER_ERROR"] = 500] = "INTERNAL_SERVER_ERROR";
     StatusCodes[StatusCodes["UNPROCESSED_ENTITY"] = 422] = "UNPROCESSED_ENTITY";
     StatusCodes[StatusCodes["UNAUTHORIZED_ACCESS"] = 401] = "UNAUTHORIZED_ACCESS";
+    StatusCodes[StatusCodes["UNAUTHORIZED_TOKEN"] = 402] = "UNAUTHORIZED_TOKEN";
     StatusCodes[StatusCodes["NOT_FOUND"] = 404] = "NOT_FOUND";
     StatusCodes[StatusCodes["BAD_REQUEST"] = 400] = "BAD_REQUEST";
 })(StatusCodes = exports.StatusCodes || (exports.StatusCodes = {}));

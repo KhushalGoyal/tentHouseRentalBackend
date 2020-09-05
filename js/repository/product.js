@@ -16,7 +16,7 @@ class ProductReprository {
         return product_1.ProductModel.paginate(filter, paginationOptions);
     }
     async getAll(requestQuery) {
-        return product_1.ProductModel.find(requestQuery).lean();
+        return product_1.ProductModel.find().lean();
     }
 }
 exports.ProductReprository = ProductReprository;

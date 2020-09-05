@@ -14,15 +14,19 @@ LoginController.post("/", async (request, response, next) => {
             response.status(app_1.StatusCodes.UNAUTHORIZED_ACCESS).send(new base_1.ErrorResponse("Invalid Request, Password/Username is missing", app_1.ErrorCodes.validation_error));
         }
         let user = await models_1.UserModel.findOne({ email: body.username }).lean();
-        console.log(user);
-        let isValid = password_1.PasswordHelper.compare(body.password, user.password);
-        let token = token_1.TokensHelper.generateToken(user, { expiresIn: '1h' });
-        if (isValid) {
-            response.status(app_1.StatusCodes.OK).send(new base_1.SuccessResponse({ token: token, type: "Bearer" }));
+        if (user) {
+            let isValid = password_1.PasswordHelper.compare(body.password, user.password);
+            let token = token_1.TokensHelper.generateToken(user, { expiresIn: 60 * 60 });
+            let referesh_token = token_1.TokensHelper.generateToken(user, { expiresIn: 60 * 60 * 60 });
+            if (isValid) {
+                response.status(app_1.StatusCodes.OK).send(new base_1.SuccessResponse({ token: token, referesh_token: referesh_token, type: "Bearer" }));
+            }
+            else {
+                response.status(app_1.StatusCodes.UNAUTHORIZED_ACCESS).send(new base_1.ErrorResponse("Invalid Password", app_1.ErrorCodes.validation_error));
+            }
+            return;
         }
-        else {
-            response.status(app_1.StatusCodes.UNAUTHORIZED_ACCESS).send(new base_1.ErrorResponse("Invalid Password", app_1.ErrorCodes.validation_error));
-        }
+        response.status(app_1.StatusCodes.UNAUTHORIZED_ACCESS).send(new base_1.ErrorResponse("User not found", app_1.ErrorCodes.validation_error));
         return;
     }
     catch (err) {
